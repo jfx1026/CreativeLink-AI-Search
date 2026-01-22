@@ -1,0 +1,24 @@
+# Cloudflare Worker configuration for AI Chat Search
+name = "design-links-chat"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+workers_dev = true
+
+# KV Namespace for caching processed links
+[[kv_namespaces]]
+binding = "LINKS_CACHE"
+id = "b38b7d1b72104844a61ea9b2ede883f9"
+
+# Cloudflare Workers AI binding (free tier available)
+[ai]
+binding = "AI"
+
+[vars]
+WORDPRESS_API_URL = "https://johnfreeborn.com/words/wp-json/wp/v2/posts"
+CATEGORY_ID = "5"
+ALLOWED_ORIGIN = "https://johnfreeborn.com"
+
+# Development settings
+[dev]
+port = 8787
+local_protocol = "http"
