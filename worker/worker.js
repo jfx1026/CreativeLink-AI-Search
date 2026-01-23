@@ -136,7 +136,8 @@ async function handleChat(request, env, ctx) {
 
     const stream = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
       messages: aiMessages,
-      stream: true
+      stream: true,
+      max_tokens: 2048
     });
 
     // Return the stream directly
