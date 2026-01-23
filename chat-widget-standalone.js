@@ -162,10 +162,13 @@
     .cl-chat-welcome-icon {
       margin-bottom: 12px;
       text-align: center;
+      display: flex;
+      justify-content: center;
     }
 
-    .cl-chat-welcome-icon i {
-      font-size: 48px !important;
+    .cl-chat-welcome-icon svg {
+      width: 48px !important;
+      height: 48px !important;
     }
 
     .cl-chat-welcome h4 {
@@ -434,7 +437,7 @@
       </div>
       <div class="cl-chat-messages" id="cl-chat-messages">
         <div class="cl-chat-welcome" id="cl-chat-welcome">
-          <div class="cl-chat-welcome-icon"><i class="fa-duotone fa-light fa-microchip-ai"></i></div>
+          <div class="cl-chat-welcome-icon"><svg viewBox="0 0 512 512" width="48" height="48"><rect x="96" y="96" width="320" height="320" rx="32" fill="#cbd5e1"/><rect x="144" y="144" width="224" height="224" rx="16" fill="#2563EB"/><text x="256" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="white">AI</text><rect x="136" y="32" width="24" height="64" rx="4" fill="#64748b"/><rect x="216" y="32" width="24" height="64" rx="4" fill="#64748b"/><rect x="272" y="32" width="24" height="64" rx="4" fill="#64748b"/><rect x="352" y="32" width="24" height="64" rx="4" fill="#64748b"/><rect x="136" y="416" width="24" height="64" rx="4" fill="#64748b"/><rect x="216" y="416" width="24" height="64" rx="4" fill="#64748b"/><rect x="272" y="416" width="24" height="64" rx="4" fill="#64748b"/><rect x="352" y="416" width="24" height="64" rx="4" fill="#64748b"/><rect x="32" y="136" width="64" height="24" rx="4" fill="#64748b"/><rect x="32" y="216" width="64" height="24" rx="4" fill="#64748b"/><rect x="32" y="272" width="64" height="24" rx="4" fill="#64748b"/><rect x="32" y="352" width="64" height="24" rx="4" fill="#64748b"/><rect x="416" y="136" width="64" height="24" rx="4" fill="#64748b"/><rect x="416" y="216" width="64" height="24" rx="4" fill="#64748b"/><rect x="416" y="272" width="64" height="24" rx="4" fill="#64748b"/><rect x="416" y="352" width="64" height="24" rx="4" fill="#64748b"/></svg></div>
           <p>Use AI chat to search through over 3500 links from the Weekly Creative Links archive.</p>
           <div class="cl-chat-suggestions">
             <button class="cl-chat-suggestion">Typography resources</button>
