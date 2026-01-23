@@ -49,9 +49,12 @@
     }
 
     .cl-chat-trigger svg {
-      width: 24px;
-      height: 24px;
-      fill: currentColor;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+      stroke: white !important;
+      fill: none !important;
     }
 
     .cl-chat-trigger .cl-icon-close {
@@ -122,8 +125,12 @@
     }
 
     .cl-chat-close svg {
-      width: 20px;
-      height: 20px;
+      width: 20px !important;
+      height: 20px !important;
+      min-width: 20px !important;
+      min-height: 20px !important;
+      stroke: currentColor !important;
+      fill: none !important;
     }
 
     /* Messages */
@@ -343,8 +350,11 @@
     }
 
     .cl-chat-send svg {
-      width: 18px;
-      height: 18px;
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px !important;
+      min-height: 18px !important;
+      fill: white !important;
     }
 
     /* Error */
