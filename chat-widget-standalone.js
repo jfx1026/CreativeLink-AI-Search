@@ -161,13 +161,11 @@
 
     .cl-chat-welcome-icon {
       margin-bottom: 12px;
-      color: #2563EB;
+      text-align: center;
     }
 
-    .cl-chat-welcome-icon svg {
-      width: 48px !important;
-      height: 48px !important;
-      stroke: #2563EB !important;
+    .cl-chat-welcome-icon i {
+      font-size: 48px !important;
     }
 
     .cl-chat-welcome h4 {
@@ -436,7 +434,7 @@
       </div>
       <div class="cl-chat-messages" id="cl-chat-messages">
         <div class="cl-chat-welcome" id="cl-chat-welcome">
-          <div class="cl-chat-welcome-icon"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><line x1="9" y1="2" x2="9" y2="5"/><line x1="15" y1="2" x2="15" y2="5"/><line x1="9" y1="19" x2="9" y2="22"/><line x1="15" y1="19" x2="15" y2="22"/><line x1="2" y1="9" x2="5" y2="9"/><line x1="2" y1="15" x2="5" y2="15"/><line x1="19" y1="9" x2="22" y2="9"/><line x1="19" y1="15" x2="22" y2="15"/><circle cx="12" cy="10" r="1.5" fill="currentColor"/><path d="M9 15l3-3 3 3"/></svg></div>
+          <div class="cl-chat-welcome-icon"><i class="fa-duotone fa-light fa-microchip-ai"></i></div>
           <p>Use AI chat to search through over 3500 links from the Weekly Creative Links archive.</p>
           <div class="cl-chat-suggestions">
             <button class="cl-chat-suggestion">Typography resources</button>
