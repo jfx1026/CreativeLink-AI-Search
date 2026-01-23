@@ -436,8 +436,7 @@
       <div class="cl-chat-messages" id="cl-chat-messages">
         <div class="cl-chat-welcome" id="cl-chat-welcome">
           <div class="cl-chat-welcome-icon"><svg viewBox="0 0 512 512" fill="currentColor" width="48" height="48"><path d="M176 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64c-35.3 0-64 28.7-64 64H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v80H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v80H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64c0 35.3 28.7 64 64 64v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h80v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h80v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448c35.3 0 64-28.7 64-64h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V256h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V128h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448c0-35.3-28.7-64-64-64V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H256V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H176V24zm80 136a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-16 96l27.1 0c8 0 15.5 4 20 10.7l56 84c7.4 11.1 4.4 26-6.7 33.4s-26 4.4-33.4-6.7L256 303.7l-46.9 73.6c-7.4 11.1-22.3 14.1-33.4 6.7s-14.1-22.3-6.7-33.4l56-84c4.4-6.7 12-10.7 20-10.7l11.1 0z"/></svg></div>
-          <h4>Search 300+ Design Links</h4>
-          <p>Ask me about design resources from the Weekly Design Links archive.</p>
+          <p>Use AI chat to search through over 3500 links from the Weekly Creative Links archive.</p>
           <div class="cl-chat-suggestions">
             <button class="cl-chat-suggestion">Typography resources</button>
             <button class="cl-chat-suggestion">Design systems</button>
