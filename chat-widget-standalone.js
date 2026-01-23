@@ -440,7 +440,7 @@
           <div class="cl-chat-suggestions">
             <button class="cl-chat-suggestion">Typography resources</button>
             <button class="cl-chat-suggestion">Design systems</button>
-            <button class="cl-chat-suggestion">AI tools</button>
+            <button class="cl-chat-suggestion">Pain Points</button>
           </div>
         </div>
       </div>
