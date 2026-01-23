@@ -420,7 +420,7 @@
 
     <div class="cl-chat-panel" id="cl-chat-panel">
       <div class="cl-chat-header">
-        <h3>Search Design Links</h3>
+        <h3>AI Search</h3>
         <button class="cl-chat-close" id="cl-chat-close" aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
