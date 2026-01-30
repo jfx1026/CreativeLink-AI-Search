@@ -6,7 +6,8 @@
  * Version: 1.0.0
  * Author: John Freeborn
  * Author URI: https://johnfreeborn.com
- * License: MIT
+ * License: GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: creativelink-ai-search
  */
 
@@ -154,7 +155,11 @@ class CreativeLink_AI_Search {
      * Register plugin settings
      */
     public function register_settings() {
-        register_setting('creativelink_ai_settings', 'creativelink_ai_options');
+        register_setting(
+            'creativelink_ai_settings',
+            'creativelink_ai_options',
+            array($this, 'sanitize_options')
+        );
 
         // Widget Settings Section
         add_settings_section(
@@ -267,6 +272,68 @@ class CreativeLink_AI_Search {
             'creativelink-ai-search',
             'creativelink_ai_content'
         );
+    }
+
+    /**
+     * Sanitize and validate options
+     */
+    public function sanitize_options($input) {
+        $sanitized = array();
+
+        // Button color - validate hex color
+        if (isset($input['button_color'])) {
+            $color = sanitize_hex_color($input['button_color']);
+            $sanitized['button_color'] = $color ? $color : '#2563EB';
+        }
+
+        // Search scope - validate against allowed values
+        $allowed_scopes = array('whole_site', 'category', 'tag', 'keyword');
+        if (isset($input['search_scope']) && in_array($input['search_scope'], $allowed_scopes, true)) {
+            $sanitized['search_scope'] = $input['search_scope'];
+        } else {
+            $sanitized['search_scope'] = 'whole_site';
+        }
+
+        // Search category - validate it exists
+        if (isset($input['search_category']) && !empty($input['search_category'])) {
+            $cat_id = absint($input['search_category']);
+            $category = get_category($cat_id);
+            $sanitized['search_category'] = $category ? $cat_id : '';
+        } else {
+            $sanitized['search_category'] = '';
+        }
+
+        // Search tag - validate it exists
+        if (isset($input['search_tag']) && !empty($input['search_tag'])) {
+            $tag_id = absint($input['search_tag']);
+            $tag = get_tag($tag_id);
+            $sanitized['search_tag'] = $tag ? $tag_id : '';
+        } else {
+            $sanitized['search_tag'] = '';
+        }
+
+        // Search keyword - sanitize text
+        if (isset($input['search_keyword'])) {
+            $sanitized['search_keyword'] = sanitize_text_field($input['search_keyword']);
+        }
+
+        // Max posts - validate range 1-500
+        if (isset($input['max_posts'])) {
+            $max_posts = absint($input['max_posts']);
+            $sanitized['max_posts'] = max(1, min(500, $max_posts));
+        } else {
+            $sanitized['max_posts'] = 50;
+        }
+
+        // Text fields - sanitize
+        $text_fields = array('welcome_text', 'placeholder_text', 'suggestion_1', 'suggestion_2', 'suggestion_3');
+        foreach ($text_fields as $field) {
+            if (isset($input[$field])) {
+                $sanitized[$field] = sanitize_text_field($input[$field]);
+            }
+        }
+
+        return $sanitized;
     }
 
     /**
