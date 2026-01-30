@@ -7,6 +7,8 @@
 
   // Get settings from WordPress
   const WORKER_URL = window.creativeLinkAI ? window.creativeLinkAI.workerUrl : 'https://design-links-chat.jfx1026.workers.dev';
+  const SEARCH_CONTEXT = window.creativeLinkAI ? window.creativeLinkAI.searchContext : [];
+  const SEARCH_SCOPE = window.creativeLinkAI ? window.creativeLinkAI.searchScope : 'Whole site';
 
   // DOM Elements
   const trigger = document.getElementById('cl-chat-trigger');
@@ -118,7 +120,11 @@
       const response = await fetch(WORKER_URL + '/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: conversationHistory })
+        body: JSON.stringify({
+          messages: conversationHistory,
+          context: SEARCH_CONTEXT,
+          scope: SEARCH_SCOPE
+        })
       });
 
       if (!response.ok) throw new Error('Failed to get response');
