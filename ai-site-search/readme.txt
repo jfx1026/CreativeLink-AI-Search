@@ -1,4 +1,4 @@
-=== AI Search ===
+=== AI Site Search ===
 Contributors: johnfreeborn
 Tags: ai, search, chat, widget, natural language
 Requires at least: 5.0
@@ -8,11 +8,11 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-AI Search is a simple, AI-powered search for your WordPress site.
+AI Site Search is a simple, AI-powered search for your WordPress site.
 
 == Description ==
 
-AI Search adds a floating chat widget to your WordPress site that lets visitors search your content using natural language. The plugin sends your post data (titles, excerpts, URLs) to your configured AI backend, which processes queries and streams responses back via Server-Sent Events.
+AI Site Search adds a floating chat widget to your WordPress site that lets visitors search your content using natural language. The plugin sends your post data (titles, excerpts, URLs) to your configured AI backend, which processes queries and streams responses back via Server-Sent Events.
 
 Features:
 
@@ -27,10 +27,10 @@ Features:
 
 == Installation ==
 
-1. Upload the `ai-search` folder to the `/wp-content/plugins/` directory
+1. Upload the `ai-site-search` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Deploy the included worker template (see Backend Setup below)
-4. Go to Settings > AI Search and paste your worker URL
+4. Go to Settings > AI Site Search and paste your worker URL
 5. The chat widget will appear on your site once configured
 
 == Backend Setup ==
@@ -42,13 +42,13 @@ A Cloudflare Worker template is included in the `worker-template` folder. To dep
 3. Navigate to the worker-template folder: `cd worker-template`
 4. Deploy: `wrangler deploy`
 5. Copy the URL (e.g., `https://ai-search-worker.your-subdomain.workers.dev`)
-6. Paste this URL in Settings > AI Search > API Endpoint
+6. Paste this URL in Settings > AI Site Search > API Endpoint
 
 The worker uses Cloudflare Workers AI which has a generous free tier (no credit card required).
 
 == Configuration ==
 
-Go to Settings > AI Search to customize:
+Go to Settings > AI Site Search to customize:
 
 * API Endpoint (required) - URL of your AI backend service
 * Button color

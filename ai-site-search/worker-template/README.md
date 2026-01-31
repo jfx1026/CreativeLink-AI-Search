@@ -1,6 +1,6 @@
-# AI Search Worker Template
+# AI Site Search Worker Template
 
-This is a ready-to-deploy Cloudflare Worker that powers the AI Search WordPress plugin. It uses **Cloudflare Workers AI** (free tier available) to process natural language queries and return relevant content from your site.
+This is a ready-to-deploy Cloudflare Worker that powers the AI Site Search WordPress plugin. It uses **Cloudflare Workers AI** (free tier available) to process natural language queries and return relevant content from your site.
 
 ## Quick Start
 
@@ -38,11 +38,11 @@ This is a ready-to-deploy Cloudflare Worker that powers the AI Search WordPress 
    ```
 
 6. **Configure the WordPress plugin**:
-   - Go to Settings > AI Search in your WordPress admin
+   - Go to Settings > AI Site Search in your WordPress admin
    - Paste your worker URL in the API Endpoint field
    - Save changes
 
-That's it! Your AI Search widget should now be working.
+That's it! Your AI Site Search widget should now be working.
 
 ## Customization
 

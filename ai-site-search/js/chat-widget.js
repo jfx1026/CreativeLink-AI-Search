@@ -1,5 +1,5 @@
 /**
- * AI Search - WordPress Plugin
+ * AI Site Search - WordPress Plugin
  */
 
 (function() {

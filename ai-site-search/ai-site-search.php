@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: AI Search
- * Plugin URI: https://github.com/jfx1026/ai-search
- * Description: AI Search is a simple, AI-powered search for your WordPress site. Adds a floating chat widget that connects to your AI backend via Server-Sent Events.
+ * Plugin Name: AI Site Search
+ * Plugin URI: https://github.com/jfx1026/ai-site-search
+ * Description: AI Site Search is a simple, AI-powered search for your WordPress site. Adds a floating chat widget that connects to your AI backend via Server-Sent Events.
  * Version: 1.0.0
  * Author: John Freeborn
  * Author URI: https://johnfreeborn.com
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: ai-search
+ * Text Domain: ai-site-search
  */
 
 // Prevent direct access
@@ -48,7 +48,7 @@ class CreativeLink_AI_Search {
         }
 
         wp_enqueue_script(
-            'ai-search',
+            'ai-site-search',
             plugin_dir_url(__FILE__) . 'js/chat-widget.js',
             array(),
             self::VERSION,
@@ -56,14 +56,14 @@ class CreativeLink_AI_Search {
         );
 
         wp_enqueue_style(
-            'ai-search',
+            'ai-site-search',
             plugin_dir_url(__FILE__) . 'css/chat-widget.css',
             array(),
             self::VERSION
         );
 
         // Pass settings to JavaScript
-        wp_localize_script('ai-search', 'creativeLinkAI', array(
+        wp_localize_script('ai-site-search', 'creativeLinkAI', array(
             'workerUrl' => $this->get_worker_url(),
             'buttonColor' => $this->get_option('button_color', '#2563EB'),
             'searchContext' => $this->get_search_context(),
@@ -83,7 +83,7 @@ class CreativeLink_AI_Search {
         $button_color = $this->get_option('button_color', '#2563EB');
         ?>
         <div id="cl-chat-widget">
-            <button class="cl-chat-trigger" id="cl-chat-trigger" aria-label="Open AI Search" style="background-color: <?php echo esc_attr($button_color); ?> !important;">
+            <button class="cl-chat-trigger" id="cl-chat-trigger" aria-label="Open AI Site Search" style="background-color: <?php echo esc_attr($button_color); ?> !important;">
                 <svg class="cl-icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>
@@ -95,7 +95,7 @@ class CreativeLink_AI_Search {
 
             <div class="cl-chat-panel" id="cl-chat-panel">
                 <div class="cl-chat-header">
-                    <h3>AI Search</h3>
+                    <h3>AI Site Search</h3>
                     <button class="cl-chat-close" id="cl-chat-close" aria-label="Close">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -145,10 +145,10 @@ class CreativeLink_AI_Search {
      */
     public function add_admin_menu() {
         add_options_page(
-            'AI Search Settings',
-            'AI Search',
+            'AI Site Search Settings',
+            'AI Site Search',
             'manage_options',
-            'ai-search',
+            'ai-site-search',
             array($this, 'render_admin_page')
         );
     }
@@ -168,14 +168,14 @@ class CreativeLink_AI_Search {
             'creativelink_ai_main',
             'Widget Settings',
             null,
-            'ai-search'
+            'ai-site-search'
         );
 
         add_settings_field(
             'button_color',
             'Button Color',
             array($this, 'render_color_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_main'
         );
 
@@ -183,7 +183,7 @@ class CreativeLink_AI_Search {
             'api_endpoint',
             'API Endpoint',
             array($this, 'render_api_endpoint_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_main'
         );
 
@@ -192,14 +192,14 @@ class CreativeLink_AI_Search {
             'creativelink_ai_search',
             'Search Settings',
             null,
-            'ai-search'
+            'ai-site-search'
         );
 
         add_settings_field(
             'search_scope',
             'Search Scope',
             array($this, 'render_search_scope_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_search'
         );
 
@@ -207,7 +207,7 @@ class CreativeLink_AI_Search {
             'search_category',
             'Category',
             array($this, 'render_category_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_search'
         );
 
@@ -215,7 +215,7 @@ class CreativeLink_AI_Search {
             'search_tag',
             'Tag',
             array($this, 'render_tag_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_search'
         );
 
@@ -223,7 +223,7 @@ class CreativeLink_AI_Search {
             'search_keyword',
             'Keyword',
             array($this, 'render_keyword_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_search'
         );
 
@@ -231,7 +231,7 @@ class CreativeLink_AI_Search {
             'max_posts',
             'Max Posts',
             array($this, 'render_max_posts_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_search'
         );
 
@@ -240,14 +240,14 @@ class CreativeLink_AI_Search {
             'creativelink_ai_content',
             'Widget Content',
             null,
-            'ai-search'
+            'ai-site-search'
         );
 
         add_settings_field(
             'welcome_text',
             'Welcome Text',
             array($this, 'render_welcome_text_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_content'
         );
 
@@ -255,7 +255,7 @@ class CreativeLink_AI_Search {
             'placeholder_text',
             'Input Placeholder',
             array($this, 'render_placeholder_text_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_content'
         );
 
@@ -263,7 +263,7 @@ class CreativeLink_AI_Search {
             'suggestion_1',
             'Suggestion 1',
             array($this, 'render_suggestion_1_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_content'
         );
 
@@ -271,7 +271,7 @@ class CreativeLink_AI_Search {
             'suggestion_2',
             'Suggestion 2',
             array($this, 'render_suggestion_2_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_content'
         );
 
@@ -279,7 +279,7 @@ class CreativeLink_AI_Search {
             'suggestion_3',
             'Suggestion 3',
             array($this, 'render_suggestion_3_field'),
-            'ai-search',
+            'ai-site-search',
             'creativelink_ai_content'
         );
     }
@@ -501,11 +501,11 @@ class CreativeLink_AI_Search {
     public function render_admin_page() {
         ?>
         <div class="wrap">
-            <h1>AI Search Settings</h1>
+            <h1>AI Site Search Settings</h1>
             <form method="post" action="options.php">
                 <?php
                 settings_fields('creativelink_ai_settings');
-                do_settings_sections('ai-search');
+                do_settings_sections('ai-site-search');
                 submit_button();
                 ?>
             </form>
