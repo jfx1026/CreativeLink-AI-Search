@@ -8,11 +8,11 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-AI-powered chat widget to search through your site's content using natural language.
+AI Search is a simple, AI-powered search for your WordPress site.
 
 == Description ==
 
-AI Search adds a floating chat widget to your WordPress site that allows visitors to search through your content using natural language queries powered by AI.
+AI Search adds a floating chat widget to your WordPress site that lets visitors search your content using natural language. The plugin sends your post data (titles, excerpts, URLs) to your configured AI backend, which processes queries and streams responses back via Server-Sent Events.
 
 Features:
 

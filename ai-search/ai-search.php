@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AI Search
  * Plugin URI: https://github.com/jfx1026/ai-search
- * Description: AI-powered chat widget to search through your site's content using natural language.
+ * Description: AI Search is a simple, AI-powered search for your WordPress site. Adds a floating chat widget that connects to your AI backend via Server-Sent Events.
  * Version: 1.0.0
  * Author: John Freeborn
  * Author URI: https://johnfreeborn.com
