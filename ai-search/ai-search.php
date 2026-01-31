@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: CreativeLink AI Search
- * Plugin URI: https://github.com/jfx1026/CreativeLink-AI-Search
- * Description: AI-powered chat widget to search through the Weekly Creative Links archive.
+ * Plugin Name: AI Search
+ * Plugin URI: https://github.com/jfx1026/ai-search
+ * Description: AI-powered chat widget to search through your site's content using natural language.
  * Version: 1.0.0
  * Author: John Freeborn
  * Author URI: https://johnfreeborn.com
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: creativelink-ai-search
+ * Text Domain: ai-search
  */
 
 // Prevent direct access
@@ -24,9 +24,9 @@ class CreativeLink_AI_Search {
     const VERSION = '1.0.0';
 
     /**
-     * Worker URL for the AI backend
+     * Default Worker URL for the AI backend
      */
-    private $worker_url = 'https://design-links-chat.jfx1026.workers.dev';
+    const DEFAULT_WORKER_URL = '';
 
     /**
      * Initialize the plugin
@@ -42,13 +42,13 @@ class CreativeLink_AI_Search {
      * Enqueue plugin scripts and styles
      */
     public function enqueue_scripts() {
-        // Only load on frontend
-        if (is_admin()) {
+        // Only load on frontend when API endpoint is configured
+        if (is_admin() || empty($this->get_worker_url())) {
             return;
         }
 
         wp_enqueue_script(
-            'creativelink-ai-search',
+            'ai-search',
             plugin_dir_url(__FILE__) . 'js/chat-widget.js',
             array(),
             self::VERSION,
@@ -56,14 +56,14 @@ class CreativeLink_AI_Search {
         );
 
         wp_enqueue_style(
-            'creativelink-ai-search',
+            'ai-search',
             plugin_dir_url(__FILE__) . 'css/chat-widget.css',
             array(),
             self::VERSION
         );
 
         // Pass settings to JavaScript
-        wp_localize_script('creativelink-ai-search', 'creativeLinkAI', array(
+        wp_localize_script('ai-search', 'creativeLinkAI', array(
             'workerUrl' => $this->get_worker_url(),
             'buttonColor' => $this->get_option('button_color', '#2563EB'),
             'searchContext' => $this->get_search_context(),
@@ -76,7 +76,8 @@ class CreativeLink_AI_Search {
      * Render the widget HTML in the footer
      */
     public function render_widget() {
-        if (is_admin()) {
+        // Only render when API endpoint is configured
+        if (is_admin() || empty($this->get_worker_url())) {
             return;
         }
         ?>
@@ -143,10 +144,10 @@ class CreativeLink_AI_Search {
      */
     public function add_admin_menu() {
         add_options_page(
-            'CreativeLink AI Search',
-            'CreativeLink AI',
+            'AI Search Settings',
+            'AI Search',
             'manage_options',
-            'creativelink-ai-search',
+            'ai-search',
             array($this, 'render_admin_page')
         );
     }
@@ -166,14 +167,22 @@ class CreativeLink_AI_Search {
             'creativelink_ai_main',
             'Widget Settings',
             null,
-            'creativelink-ai-search'
+            'ai-search'
         );
 
         add_settings_field(
             'button_color',
             'Button Color',
             array($this, 'render_color_field'),
-            'creativelink-ai-search',
+            'ai-search',
+            'creativelink_ai_main'
+        );
+
+        add_settings_field(
+            'api_endpoint',
+            'API Endpoint',
+            array($this, 'render_api_endpoint_field'),
+            'ai-search',
             'creativelink_ai_main'
         );
 
@@ -182,14 +191,14 @@ class CreativeLink_AI_Search {
             'creativelink_ai_search',
             'Search Settings',
             null,
-            'creativelink-ai-search'
+            'ai-search'
         );
 
         add_settings_field(
             'search_scope',
             'Search Scope',
             array($this, 'render_search_scope_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_search'
         );
 
@@ -197,7 +206,7 @@ class CreativeLink_AI_Search {
             'search_category',
             'Category',
             array($this, 'render_category_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_search'
         );
 
@@ -205,7 +214,7 @@ class CreativeLink_AI_Search {
             'search_tag',
             'Tag',
             array($this, 'render_tag_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_search'
         );
 
@@ -213,7 +222,7 @@ class CreativeLink_AI_Search {
             'search_keyword',
             'Keyword',
             array($this, 'render_keyword_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_search'
         );
 
@@ -221,7 +230,7 @@ class CreativeLink_AI_Search {
             'max_posts',
             'Max Posts',
             array($this, 'render_max_posts_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_search'
         );
 
@@ -230,14 +239,14 @@ class CreativeLink_AI_Search {
             'creativelink_ai_content',
             'Widget Content',
             null,
-            'creativelink-ai-search'
+            'ai-search'
         );
 
         add_settings_field(
             'welcome_text',
             'Welcome Text',
             array($this, 'render_welcome_text_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_content'
         );
 
@@ -245,7 +254,7 @@ class CreativeLink_AI_Search {
             'placeholder_text',
             'Input Placeholder',
             array($this, 'render_placeholder_text_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_content'
         );
 
@@ -253,7 +262,7 @@ class CreativeLink_AI_Search {
             'suggestion_1',
             'Suggestion 1',
             array($this, 'render_suggestion_1_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_content'
         );
 
@@ -261,7 +270,7 @@ class CreativeLink_AI_Search {
             'suggestion_2',
             'Suggestion 2',
             array($this, 'render_suggestion_2_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_content'
         );
 
@@ -269,7 +278,7 @@ class CreativeLink_AI_Search {
             'suggestion_3',
             'Suggestion 3',
             array($this, 'render_suggestion_3_field'),
-            'creativelink-ai-search',
+            'ai-search',
             'creativelink_ai_content'
         );
     }
@@ -279,6 +288,14 @@ class CreativeLink_AI_Search {
      */
     public function sanitize_options($input) {
         $sanitized = array();
+
+        // API endpoint - validate URL (allow empty)
+        if (isset($input['api_endpoint']) && !empty($input['api_endpoint'])) {
+            $url = esc_url_raw($input['api_endpoint'], array('https'));
+            $sanitized['api_endpoint'] = $url ? $url : '';
+        } else {
+            $sanitized['api_endpoint'] = '';
+        }
 
         // Button color - validate hex color
         if (isset($input['button_color'])) {
@@ -342,6 +359,20 @@ class CreativeLink_AI_Search {
     public function render_color_field() {
         $color = $this->get_option('button_color', '#2563EB');
         echo '<input type="color" name="creativelink_ai_options[button_color]" value="' . esc_attr($color) . '">';
+    }
+
+    /**
+     * Render API endpoint field
+     */
+    public function render_api_endpoint_field() {
+        $url = $this->get_option('api_endpoint', self::DEFAULT_WORKER_URL);
+        echo '<input type="url" name="creativelink_ai_options[api_endpoint]" value="' . esc_attr($url) . '" class="large-text" placeholder="https://your-worker.your-subdomain.workers.dev">';
+        echo '<p class="description"><strong>Required.</strong> The URL of your AI backend service (must use HTTPS).</p>';
+        echo '<p class="description">Your backend should accept POST requests to <code>/chat</code> with JSON body containing <code>messages</code> (conversation history), <code>context</code> (post data), and <code>scope</code> (search scope label).</p>';
+        echo '<p class="description">Responses should be Server-Sent Events with <code>data: {"response": "text"}</code> for streaming text, and optionally <code>data: {"results": [{"title": "...", "url": "...", "excerpt": "..."}]}</code> for structured results.</p>';
+        if (empty($url)) {
+            echo '<p class="description" style="color: #d63638;"><strong>Note:</strong> The chat widget will not function until an API endpoint is configured.</p>';
+        }
     }
 
     /**
@@ -469,11 +500,11 @@ class CreativeLink_AI_Search {
     public function render_admin_page() {
         ?>
         <div class="wrap">
-            <h1>CreativeLink AI Search Settings</h1>
+            <h1>AI Search Settings</h1>
             <form method="post" action="options.php">
                 <?php
                 settings_fields('creativelink_ai_settings');
-                do_settings_sections('creativelink-ai-search');
+                do_settings_sections('ai-search');
                 submit_button();
                 ?>
             </form>
@@ -613,7 +644,7 @@ class CreativeLink_AI_Search {
      * Get worker URL
      */
     private function get_worker_url() {
-        return $this->worker_url;
+        return $this->get_option('api_endpoint', self::DEFAULT_WORKER_URL);
     }
 }
 

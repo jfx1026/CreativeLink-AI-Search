@@ -1,12 +1,12 @@
 /**
- * CreativeLink AI Search - WordPress Plugin
+ * AI Search - WordPress Plugin
  */
 
 (function() {
   'use strict';
 
   // Get settings from WordPress
-  const WORKER_URL = window.creativeLinkAI ? window.creativeLinkAI.workerUrl : 'https://design-links-chat.jfx1026.workers.dev';
+  const WORKER_URL = window.creativeLinkAI ? window.creativeLinkAI.workerUrl : '';
   const SEARCH_CONTEXT = window.creativeLinkAI ? window.creativeLinkAI.searchContext : [];
   const SEARCH_SCOPE = window.creativeLinkAI ? window.creativeLinkAI.searchScope : 'Whole site';
 
@@ -156,6 +156,11 @@
                 contentEl.innerHTML = parseMarkdown(fullResponse);
                 messages.scrollTop = messages.scrollHeight;
               }
+              // Handle structured results
+              if (parsed.results && Array.isArray(parsed.results)) {
+                contentEl.innerHTML += renderResults(parsed.results);
+                messages.scrollTop = messages.scrollHeight;
+              }
             } catch (e) {}
           }
         }
@@ -184,6 +189,22 @@
     html = html.replace(/\n\n/g, '</p><p>');
     html = html.replace(/\n/g, '<br>');
     if (!html.startsWith('<p>')) html = '<p>' + html + '</p>';
+    return html;
+  }
+
+  function renderResults(results) {
+    if (!results || !results.length) return '';
+    let html = '<div class="cl-results">';
+    for (const result of results) {
+      const title = escapeHtml(result.title || '');
+      const excerpt = escapeHtml(result.excerpt || result.title || '');
+      const url = result.url || '#';
+      html += '<div class="cl-result">';
+      html += '<div class="cl-result-title">' + title + '</div>';
+      html += '<a href="' + url + '" class="cl-result-link" target="_blank" rel="noopener">' + excerpt + '</a>';
+      html += '</div>';
+    }
+    html += '</div>';
     return html;
   }
 

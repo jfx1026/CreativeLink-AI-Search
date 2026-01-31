@@ -354,6 +354,40 @@
   font-size: 13px;
 }
 
+/* Result Cards */
+.cl-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.cl-result {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.cl-result-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.cl-result-link {
+  font-size: 13px;
+  color: #2563eb;
+  text-decoration: none;
+  display: block;
+  line-height: 1.4;
+}
+
+.cl-result-link:hover {
+  text-decoration: underline;
+}
+
 /* Mobile */
 @media (max-width: 480px) {
   .cl-chat-trigger {
