@@ -201,7 +201,7 @@
       const url = result.url || '#';
       html += '<div class="cl-result">';
       html += '<div class="cl-result-title">' + title + '</div>';
-      html += '<a href="' + url + '" class="cl-result-link" target="_blank" rel="noopener">' + excerpt + '</a>';
+      html += '<a href="' + url + '" class="cl-result-link">' + excerpt + '</a>';
       html += '</div>';
     }
     html += '</div>';

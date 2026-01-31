@@ -23,14 +23,28 @@ Features:
 * Mobile responsive design
 * Customizable button color and widget text
 
-**Note:** This plugin requires an external AI backend service to function. You'll need to deploy your own Cloudflare Worker or similar backend that processes queries and returns AI-generated responses.
+**Note:** This plugin requires an AI backend service. A ready-to-deploy Cloudflare Worker template is included in the `worker-template` folder.
 
 == Installation ==
 
 1. Upload the `ai-search` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to Settings > AI Search and configure your API endpoint
-4. The chat widget will appear on your site once configured
+3. Deploy the included worker template (see Backend Setup below)
+4. Go to Settings > AI Search and paste your worker URL
+5. The chat widget will appear on your site once configured
+
+== Backend Setup ==
+
+A Cloudflare Worker template is included in the `worker-template` folder. To deploy it:
+
+1. Install [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/): `npm install -g wrangler`
+2. Login to Cloudflare: `wrangler login`
+3. Navigate to the worker-template folder: `cd worker-template`
+4. Deploy: `wrangler deploy`
+5. Copy the URL (e.g., `https://ai-search-worker.your-subdomain.workers.dev`)
+6. Paste this URL in Settings > AI Search > API Endpoint
+
+The worker uses Cloudflare Workers AI which has a generous free tier (no credit card required).
 
 == Configuration ==
 

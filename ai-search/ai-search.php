@@ -80,9 +80,10 @@ class CreativeLink_AI_Search {
         if (is_admin() || empty($this->get_worker_url())) {
             return;
         }
+        $button_color = $this->get_option('button_color', '#2563EB');
         ?>
         <div id="cl-chat-widget">
-            <button class="cl-chat-trigger" id="cl-chat-trigger" aria-label="Open AI Search">
+            <button class="cl-chat-trigger" id="cl-chat-trigger" aria-label="Open AI Search" style="background-color: <?php echo esc_attr($button_color); ?> !important;">
                 <svg class="cl-icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>
@@ -545,7 +546,7 @@ class CreativeLink_AI_Search {
 
         // Build query args based on scope
         $args = array(
-            'post_type' => 'post',
+            'post_type' => array('post', 'page'),
             'post_status' => 'publish',
             'posts_per_page' => $max_posts,
             'orderby' => 'date',
