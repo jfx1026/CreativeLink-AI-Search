@@ -52,7 +52,10 @@ class CreativeLink_AI_Search {
             plugin_dir_url(__FILE__) . 'js/chat-widget.js',
             array(),
             self::VERSION,
-            true
+            array(
+                'in_footer' => true,
+                'strategy'  => 'defer',
+            )
         );
 
         wp_enqueue_style(
@@ -83,7 +86,7 @@ class CreativeLink_AI_Search {
         $button_color = $this->get_option('button_color', '#2563EB');
         ?>
         <div id="cl-chat-widget">
-            <button class="cl-chat-trigger" id="cl-chat-trigger" aria-label="Open AI Site Search" style="background-color: <?php echo esc_attr($button_color); ?> !important;">
+            <button class="cl-chat-trigger" id="cl-chat-trigger" aria-label="<?php esc_attr_e( 'Open AI Site Search', 'ai-site-search' ); ?>" style="background-color: <?php echo esc_attr($button_color); ?> !important;">
                 <svg class="cl-icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>
@@ -95,8 +98,8 @@ class CreativeLink_AI_Search {
 
             <div class="cl-chat-panel" id="cl-chat-panel">
                 <div class="cl-chat-header">
-                    <h3>AI Site Search</h3>
-                    <button class="cl-chat-close" id="cl-chat-close" aria-label="Close">
+                    <h3><?php esc_html_e( 'AI Site Search', 'ai-site-search' ); ?></h3>
+                    <button class="cl-chat-close" id="cl-chat-close" aria-label="<?php esc_attr_e( 'Close', 'ai-site-search' ); ?>">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
                             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -128,7 +131,7 @@ class CreativeLink_AI_Search {
                 <div class="cl-chat-input-area">
                     <form class="cl-chat-input-form" id="cl-chat-form">
                         <textarea class="cl-chat-input" id="cl-chat-input" placeholder="<?php echo esc_attr($this->get_option('placeholder_text', 'Ask a question...')); ?>" rows="1"></textarea>
-                        <button type="submit" class="cl-chat-send" id="cl-chat-send" aria-label="Send">
+                        <button type="submit" class="cl-chat-send" id="cl-chat-send" aria-label="<?php esc_attr_e( 'Send', 'ai-site-search' ); ?>">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
                             </svg>
@@ -145,8 +148,8 @@ class CreativeLink_AI_Search {
      */
     public function add_admin_menu() {
         add_options_page(
-            'AI Site Search Settings',
-            'AI Site Search',
+            __( 'AI Site Search Settings', 'ai-site-search' ),
+            __( 'AI Site Search', 'ai-site-search' ),
             'manage_options',
             'ai-site-search',
             array($this, 'render_admin_page')
@@ -166,14 +169,14 @@ class CreativeLink_AI_Search {
         // Widget Settings Section
         add_settings_section(
             'creativelink_ai_main',
-            'Widget Settings',
+            __( 'Widget Settings', 'ai-site-search' ),
             null,
             'ai-site-search'
         );
 
         add_settings_field(
             'button_color',
-            'Button Color',
+            __( 'Button Color', 'ai-site-search' ),
             array($this, 'render_color_field'),
             'ai-site-search',
             'creativelink_ai_main'
@@ -181,7 +184,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'api_endpoint',
-            'API Endpoint',
+            __( 'API Endpoint', 'ai-site-search' ),
             array($this, 'render_api_endpoint_field'),
             'ai-site-search',
             'creativelink_ai_main'
@@ -190,14 +193,14 @@ class CreativeLink_AI_Search {
         // Search Settings Section
         add_settings_section(
             'creativelink_ai_search',
-            'Search Settings',
+            __( 'Search Settings', 'ai-site-search' ),
             null,
             'ai-site-search'
         );
 
         add_settings_field(
             'search_scope',
-            'Search Scope',
+            __( 'Search Scope', 'ai-site-search' ),
             array($this, 'render_search_scope_field'),
             'ai-site-search',
             'creativelink_ai_search'
@@ -205,7 +208,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'search_category',
-            'Category',
+            __( 'Category', 'ai-site-search' ),
             array($this, 'render_category_field'),
             'ai-site-search',
             'creativelink_ai_search'
@@ -213,7 +216,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'search_tag',
-            'Tag',
+            __( 'Tag', 'ai-site-search' ),
             array($this, 'render_tag_field'),
             'ai-site-search',
             'creativelink_ai_search'
@@ -221,7 +224,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'search_keyword',
-            'Keyword',
+            __( 'Keyword', 'ai-site-search' ),
             array($this, 'render_keyword_field'),
             'ai-site-search',
             'creativelink_ai_search'
@@ -229,7 +232,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'max_posts',
-            'Max Posts',
+            __( 'Max Posts', 'ai-site-search' ),
             array($this, 'render_max_posts_field'),
             'ai-site-search',
             'creativelink_ai_search'
@@ -238,14 +241,14 @@ class CreativeLink_AI_Search {
         // Widget Content Section
         add_settings_section(
             'creativelink_ai_content',
-            'Widget Content',
+            __( 'Widget Content', 'ai-site-search' ),
             null,
             'ai-site-search'
         );
 
         add_settings_field(
             'welcome_text',
-            'Welcome Text',
+            __( 'Welcome Text', 'ai-site-search' ),
             array($this, 'render_welcome_text_field'),
             'ai-site-search',
             'creativelink_ai_content'
@@ -253,7 +256,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'placeholder_text',
-            'Input Placeholder',
+            __( 'Input Placeholder', 'ai-site-search' ),
             array($this, 'render_placeholder_text_field'),
             'ai-site-search',
             'creativelink_ai_content'
@@ -261,7 +264,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'suggestion_1',
-            'Suggestion 1',
+            __( 'Suggestion 1', 'ai-site-search' ),
             array($this, 'render_suggestion_1_field'),
             'ai-site-search',
             'creativelink_ai_content'
@@ -269,7 +272,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'suggestion_2',
-            'Suggestion 2',
+            __( 'Suggestion 2', 'ai-site-search' ),
             array($this, 'render_suggestion_2_field'),
             'ai-site-search',
             'creativelink_ai_content'
@@ -277,7 +280,7 @@ class CreativeLink_AI_Search {
 
         add_settings_field(
             'suggestion_3',
-            'Suggestion 3',
+            __( 'Suggestion 3', 'ai-site-search' ),
             array($this, 'render_suggestion_3_field'),
             'ai-site-search',
             'creativelink_ai_content'
@@ -368,11 +371,11 @@ class CreativeLink_AI_Search {
     public function render_api_endpoint_field() {
         $url = $this->get_option('api_endpoint', self::DEFAULT_WORKER_URL);
         echo '<input type="url" name="creativelink_ai_options[api_endpoint]" value="' . esc_attr($url) . '" class="large-text" placeholder="https://your-worker.your-subdomain.workers.dev">';
-        echo '<p class="description"><strong>Required.</strong> The URL of your AI backend service (must use HTTPS).</p>';
-        echo '<p class="description">Your backend should accept POST requests to <code>/chat</code> with JSON body containing <code>messages</code> (conversation history), <code>context</code> (post data), and <code>scope</code> (search scope label).</p>';
-        echo '<p class="description">Responses should be Server-Sent Events with <code>data: {"response": "text"}</code> for streaming text, and optionally <code>data: {"results": [{"title": "...", "url": "...", "excerpt": "..."}]}</code> for structured results.</p>';
+        echo '<p class="description"><strong>' . esc_html__( 'Required.', 'ai-site-search' ) . '</strong> ' . esc_html__( 'The URL of your AI backend service (must use HTTPS).', 'ai-site-search' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Your backend should accept POST requests to /chat with JSON body containing messages (conversation history), context (post data), and scope (search scope label).', 'ai-site-search' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Responses should be Server-Sent Events with data: {"response": "text"} for streaming text.', 'ai-site-search' ) . '</p>';
         if (empty($url)) {
-            echo '<p class="description" style="color: #d63638;"><strong>Note:</strong> The chat widget will not function until an API endpoint is configured.</p>';
+            echo '<p class="description" style="color: #d63638;"><strong>' . esc_html__( 'Note:', 'ai-site-search' ) . '</strong> ' . esc_html__( 'The chat widget will not function until an API endpoint is configured.', 'ai-site-search' ) . '</p>';
         }
     }
 
@@ -382,10 +385,10 @@ class CreativeLink_AI_Search {
     public function render_search_scope_field() {
         $scope = $this->get_option('search_scope', 'whole_site');
         $options = array(
-            'whole_site' => 'Whole site',
-            'category' => 'Specific category',
-            'tag' => 'Specific tag',
-            'keyword' => 'Keyword filter'
+            'whole_site' => __( 'Whole site', 'ai-site-search' ),
+            'category' => __( 'Specific category', 'ai-site-search' ),
+            'tag' => __( 'Specific tag', 'ai-site-search' ),
+            'keyword' => __( 'Keyword filter', 'ai-site-search' )
         );
 
         foreach ($options as $value => $label) {
@@ -395,7 +398,7 @@ class CreativeLink_AI_Search {
             echo esc_html($label);
             echo '</label>';
         }
-        echo '<p class="description">Select what content the AI should search through.</p>';
+        echo '<p class="description">' . esc_html__( 'Select what content the AI should search through.', 'ai-site-search' ) . '</p>';
     }
 
     /**
@@ -406,13 +409,13 @@ class CreativeLink_AI_Search {
         $categories = get_categories(array('hide_empty' => false));
 
         echo '<select name="creativelink_ai_options[search_category]" id="creativelink-search-category">';
-        echo '<option value="">-- Select Category --</option>';
+        echo '<option value="">' . esc_html__( '-- Select Category --', 'ai-site-search' ) . '</option>';
         foreach ($categories as $category) {
             $selected_attr = selected($selected, $category->term_id, false);
             echo '<option value="' . esc_attr($category->term_id) . '"' . $selected_attr . '>' . esc_html($category->name) . '</option>';
         }
         echo '</select>';
-        echo '<p class="description">Only posts in this category will be searched.</p>';
+        echo '<p class="description">' . esc_html__( 'Only posts in this category will be searched.', 'ai-site-search' ) . '</p>';
     }
 
     /**
@@ -423,13 +426,13 @@ class CreativeLink_AI_Search {
         $tags = get_tags(array('hide_empty' => false));
 
         echo '<select name="creativelink_ai_options[search_tag]" id="creativelink-search-tag">';
-        echo '<option value="">-- Select Tag --</option>';
+        echo '<option value="">' . esc_html__( '-- Select Tag --', 'ai-site-search' ) . '</option>';
         foreach ($tags as $tag) {
             $selected_attr = selected($selected, $tag->term_id, false);
             echo '<option value="' . esc_attr($tag->term_id) . '"' . $selected_attr . '>' . esc_html($tag->name) . '</option>';
         }
         echo '</select>';
-        echo '<p class="description">Only posts with this tag will be searched.</p>';
+        echo '<p class="description">' . esc_html__( 'Only posts with this tag will be searched.', 'ai-site-search' ) . '</p>';
     }
 
     /**
@@ -438,7 +441,7 @@ class CreativeLink_AI_Search {
     public function render_keyword_field() {
         $keyword = $this->get_option('search_keyword', '');
         echo '<input type="text" name="creativelink_ai_options[search_keyword]" id="creativelink-search-keyword" value="' . esc_attr($keyword) . '" class="regular-text">';
-        echo '<p class="description">Only posts containing this keyword in title or content will be searched.</p>';
+        echo '<p class="description">' . esc_html__( 'Only posts containing this keyword in title or content will be searched.', 'ai-site-search' ) . '</p>';
     }
 
     /**
@@ -447,25 +450,25 @@ class CreativeLink_AI_Search {
     public function render_max_posts_field() {
         $max_posts = $this->get_option('max_posts', 50);
         echo '<input type="number" name="creativelink_ai_options[max_posts]" value="' . esc_attr($max_posts) . '" min="1" max="500" style="width: 80px;">';
-        echo '<p class="description">Maximum number of posts to include in search context (1-500).</p>';
+        echo '<p class="description">' . esc_html__( 'Maximum number of posts to include in search context (1-500).', 'ai-site-search' ) . '</p>';
     }
 
     /**
      * Render welcome text field
      */
     public function render_welcome_text_field() {
-        $text = $this->get_option('welcome_text', 'Ask questions about our content and get AI-powered answers.');
+        $text = $this->get_option('welcome_text', __( 'Ask questions about our content and get AI-powered answers.', 'ai-site-search' ));
         echo '<input type="text" name="creativelink_ai_options[welcome_text]" value="' . esc_attr($text) . '" class="large-text">';
-        echo '<p class="description">Text displayed below the icon in the chat welcome screen.</p>';
+        echo '<p class="description">' . esc_html__( 'Text displayed below the icon in the chat welcome screen.', 'ai-site-search' ) . '</p>';
     }
 
     /**
      * Render placeholder text field
      */
     public function render_placeholder_text_field() {
-        $text = $this->get_option('placeholder_text', 'Ask a question...');
+        $text = $this->get_option('placeholder_text', __( 'Ask a question...', 'ai-site-search' ));
         echo '<input type="text" name="creativelink_ai_options[placeholder_text]" value="' . esc_attr($text) . '" class="regular-text">';
-        echo '<p class="description">Placeholder text shown in the chat input field.</p>';
+        echo '<p class="description">' . esc_html__( 'Placeholder text shown in the chat input field.', 'ai-site-search' ) . '</p>';
     }
 
     /**
@@ -474,7 +477,7 @@ class CreativeLink_AI_Search {
     public function render_suggestion_1_field() {
         $text = $this->get_option('suggestion_1', '');
         echo '<input type="text" name="creativelink_ai_options[suggestion_1]" value="' . esc_attr($text) . '" class="regular-text">';
-        echo '<p class="description">First example search suggestion. Leave empty to hide.</p>';
+        echo '<p class="description">' . esc_html__( 'First example search suggestion. Leave empty to hide.', 'ai-site-search' ) . '</p>';
     }
 
     /**
@@ -483,7 +486,7 @@ class CreativeLink_AI_Search {
     public function render_suggestion_2_field() {
         $text = $this->get_option('suggestion_2', '');
         echo '<input type="text" name="creativelink_ai_options[suggestion_2]" value="' . esc_attr($text) . '" class="regular-text">';
-        echo '<p class="description">Second example search suggestion. Leave empty to hide.</p>';
+        echo '<p class="description">' . esc_html__( 'Second example search suggestion. Leave empty to hide.', 'ai-site-search' ) . '</p>';
     }
 
     /**
@@ -492,7 +495,7 @@ class CreativeLink_AI_Search {
     public function render_suggestion_3_field() {
         $text = $this->get_option('suggestion_3', '');
         echo '<input type="text" name="creativelink_ai_options[suggestion_3]" value="' . esc_attr($text) . '" class="regular-text">';
-        echo '<p class="description">Third example search suggestion. Leave empty to hide.</p>';
+        echo '<p class="description">' . esc_html__( 'Third example search suggestion. Leave empty to hide.', 'ai-site-search' ) . '</p>';
     }
 
     /**
@@ -501,7 +504,7 @@ class CreativeLink_AI_Search {
     public function render_admin_page() {
         ?>
         <div class="wrap">
-            <h1>AI Site Search Settings</h1>
+            <h1><?php esc_html_e( 'AI Site Search Settings', 'ai-site-search' ); ?></h1>
             <form method="post" action="options.php">
                 <?php
                 settings_fields('creativelink_ai_settings');
@@ -611,25 +614,28 @@ class CreativeLink_AI_Search {
                 $cat_id = $this->get_option('search_category', '');
                 if ($cat_id) {
                     $category = get_category($cat_id);
-                    return $category ? 'Category: ' . $category->name : 'Category';
+                    /* translators: %s: category name */
+                    return $category ? sprintf( __( 'Category: %s', 'ai-site-search' ), $category->name ) : __( 'Category', 'ai-site-search' );
                 }
-                return 'Category';
+                return __( 'Category', 'ai-site-search' );
 
             case 'tag':
                 $tag_id = $this->get_option('search_tag', '');
                 if ($tag_id) {
                     $tag = get_tag($tag_id);
-                    return $tag ? 'Tag: ' . $tag->name : 'Tag';
+                    /* translators: %s: tag name */
+                    return $tag ? sprintf( __( 'Tag: %s', 'ai-site-search' ), $tag->name ) : __( 'Tag', 'ai-site-search' );
                 }
-                return 'Tag';
+                return __( 'Tag', 'ai-site-search' );
 
             case 'keyword':
                 $keyword = $this->get_option('search_keyword', '');
-                return $keyword ? 'Keyword: ' . $keyword : 'Keyword';
+                /* translators: %s: keyword */
+                return $keyword ? sprintf( __( 'Keyword: %s', 'ai-site-search' ), $keyword ) : __( 'Keyword', 'ai-site-search' );
 
             case 'whole_site':
             default:
-                return 'Whole site';
+                return __( 'Whole site', 'ai-site-search' );
         }
     }
 
