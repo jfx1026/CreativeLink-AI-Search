@@ -184,7 +184,9 @@
   function parseMarkdown(text) {
     if (!text) return '';
     let html = escapeHtml(text);
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, linkText, url) {
+      return '<a href="' + sanitizeUrl(url) + '">' + linkText + '</a>';
+    });
     html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
     html = html.replace(/\n\n/g, '</p><p>');
     html = html.replace(/\n/g, '<br>');
@@ -198,7 +200,7 @@
     for (const result of results) {
       const title = escapeHtml(result.title || '');
       const excerpt = escapeHtml(result.excerpt || result.title || '');
-      const url = result.url || '#';
+      const url = sanitizeUrl(result.url);
       html += '<div class="cl-result">';
       html += '<div class="cl-result-title">' + title + '</div>';
       html += '<a href="' + url + '" class="cl-result-link">' + excerpt + '</a>';
@@ -212,6 +214,15 @@
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+  }
+
+  function sanitizeUrl(url) {
+    if (!url || typeof url !== 'string') return '#';
+    const trimmed = url.trim().toLowerCase();
+    if (trimmed.startsWith('https://') || trimmed.startsWith('http://')) {
+      return url.trim();
+    }
+    return '#';
   }
 
 })();
