@@ -49,9 +49,12 @@
     }
 
     .cl-chat-trigger svg {
-      width: 24px;
-      height: 24px;
-      fill: currentColor;
+      width: 24px !important;
+      height: 24px !important;
+      min-width: 24px !important;
+      min-height: 24px !important;
+      stroke: white !important;
+      fill: none !important;
     }
 
     .cl-chat-trigger .cl-icon-close {
@@ -122,8 +125,12 @@
     }
 
     .cl-chat-close svg {
-      width: 20px;
-      height: 20px;
+      width: 20px !important;
+      height: 20px !important;
+      min-width: 20px !important;
+      min-height: 20px !important;
+      stroke: currentColor !important;
+      fill: none !important;
     }
 
     /* Messages */
@@ -153,8 +160,15 @@
     }
 
     .cl-chat-welcome-icon {
-      font-size: 40px;
       margin-bottom: 12px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cl-chat-welcome-icon svg {
+      width: 48px !important;
+      height: 48px !important;
     }
 
     .cl-chat-welcome h4 {
@@ -343,8 +357,11 @@
     }
 
     .cl-chat-send svg {
-      width: 18px;
-      height: 18px;
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px !important;
+      min-height: 18px !important;
+      fill: white !important;
     }
 
     /* Error */
@@ -410,7 +427,7 @@
 
     <div class="cl-chat-panel" id="cl-chat-panel">
       <div class="cl-chat-header">
-        <h3>Search Design Links</h3>
+        <h3>AI Search</h3>
         <button class="cl-chat-close" id="cl-chat-close" aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -420,13 +437,12 @@
       </div>
       <div class="cl-chat-messages" id="cl-chat-messages">
         <div class="cl-chat-welcome" id="cl-chat-welcome">
-          <div class="cl-chat-welcome-icon">✨</div>
-          <h4>Search 300+ Design Links</h4>
-          <p>Ask me about design resources from the Weekly Design Links archive.</p>
+          <div class="cl-chat-welcome-icon"><svg viewBox="0 0 512 512" width="48" height="48"><rect x="96" y="96" width="320" height="320" rx="32" fill="#cbd5e1"/><rect x="144" y="144" width="224" height="224" rx="16" fill="#2563EB"/><text x="256" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="white">AI</text><rect x="136" y="32" width="24" height="64" rx="4" fill="#64748b"/><rect x="216" y="32" width="24" height="64" rx="4" fill="#64748b"/><rect x="272" y="32" width="24" height="64" rx="4" fill="#64748b"/><rect x="352" y="32" width="24" height="64" rx="4" fill="#64748b"/><rect x="136" y="416" width="24" height="64" rx="4" fill="#64748b"/><rect x="216" y="416" width="24" height="64" rx="4" fill="#64748b"/><rect x="272" y="416" width="24" height="64" rx="4" fill="#64748b"/><rect x="352" y="416" width="24" height="64" rx="4" fill="#64748b"/><rect x="32" y="136" width="64" height="24" rx="4" fill="#64748b"/><rect x="32" y="216" width="64" height="24" rx="4" fill="#64748b"/><rect x="32" y="272" width="64" height="24" rx="4" fill="#64748b"/><rect x="32" y="352" width="64" height="24" rx="4" fill="#64748b"/><rect x="416" y="136" width="64" height="24" rx="4" fill="#64748b"/><rect x="416" y="216" width="64" height="24" rx="4" fill="#64748b"/><rect x="416" y="272" width="64" height="24" rx="4" fill="#64748b"/><rect x="416" y="352" width="64" height="24" rx="4" fill="#64748b"/></svg></div>
+          <p>Use AI chat to search through over 3500 links from the Weekly Creative Links archive.</p>
           <div class="cl-chat-suggestions">
             <button class="cl-chat-suggestion">Typography resources</button>
             <button class="cl-chat-suggestion">Design systems</button>
-            <button class="cl-chat-suggestion">AI tools</button>
+            <button class="cl-chat-suggestion">Pain Points</button>
           </div>
         </div>
       </div>
@@ -614,7 +630,7 @@
   function parseMarkdown(text) {
     if (!text) return '';
     let html = escapeHtml(text);
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
     html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
     html = html.replace(/\n\n/g, '</p><p>');
     html = html.replace(/\n/g, '<br>');

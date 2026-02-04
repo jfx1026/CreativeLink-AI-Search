@@ -136,7 +136,8 @@ async function handleChat(request, env, ctx) {
 
     const stream = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
       messages: aiMessages,
-      stream: true
+      stream: true,
+      max_tokens: 2048
     });
 
     // Return the stream directly
@@ -228,7 +229,7 @@ DO NOT make up or invent any links. You can ONLY recommend links that are explic
   const linksContext = relevantLinks.map(link => {
     const desc = link.description ? link.description : '';
     // Create deep link with Text Fragment API to scroll to the link title
-    const textFragment = encodeURIComponent(link.title).replace(/%20/g, '%20');
+    const textFragment = encodeTextFragment(link.title);
     const deepLink = `${link.postUrl}#:~:text=${textFragment}`;
     return `LINK: "${link.title}"${desc ? ` - ${desc}` : ''}\nPOST: [${link.postTitle}](${deepLink})`;
   }).join('\n\n');
@@ -463,6 +464,35 @@ function decodeHTMLEntities(text) {
 // ==========================================================================
 // Utilities
 // ==========================================================================
+
+/**
+ * Encode text for Text Fragment API
+ * The Text Fragment API requires specific encoding to match visible page text
+ */
+function encodeTextFragment(text) {
+  if (!text) return '';
+
+  // Normalize the text - replace smart quotes and dashes with standard ones
+  let normalized = text
+    .replace(/[\u2018\u2019]/g, "'")  // Smart single quotes
+    .replace(/[\u201C\u201D]/g, '"')  // Smart double quotes
+    .replace(/[\u2013\u2014]/g, '-')  // En-dash and em-dash
+    .replace(/\u2026/g, '...')        // Ellipsis
+    .trim();
+
+  // For longer titles, use just the first few words to improve matching
+  // This helps when the page rendering differs slightly
+  const words = normalized.split(/\s+/);
+  if (words.length > 5) {
+    normalized = words.slice(0, 5).join(' ');
+  }
+
+  // Percent-encode for URL, then handle special Text Fragment requirements
+  // Text Fragment uses standard percent-encoding but spaces as %20
+  return encodeURIComponent(normalized)
+    .replace(/'/g, '%27')  // Encode apostrophes
+    .replace(/!/g, '%21'); // Encode exclamation marks
+}
 
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {

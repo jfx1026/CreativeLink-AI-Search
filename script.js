@@ -132,17 +132,15 @@
   });
 
   // ==========================================================================
-  // Form Handling (Web Awesome components)
+  // Form Handling
   // ==========================================================================
   if (ctaForm) {
     ctaForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // Web Awesome uses wa-input custom element
-      const emailInput = this.querySelector('wa-input');
-      const submitBtn = this.querySelector('wa-button[type="submit"]');
+      const emailInput = this.querySelector('input[type="email"]');
+      const submitBtn = this.querySelector('button[type="submit"]');
 
-      // Get value from wa-input (web component)
       const email = emailInput ? emailInput.value : '';
 
       // Validate email
@@ -155,12 +153,12 @@
       const originalContent = submitBtn.innerHTML;
 
       // Simulate form submission
-      submitBtn.innerHTML = '<wa-spinner></wa-spinner> Submitting...';
+      submitBtn.innerHTML = 'Submitting...';
       submitBtn.disabled = true;
 
       // Simulate async request
       setTimeout(function() {
-        submitBtn.innerHTML = '<wa-icon name="check" slot="prefix"></wa-icon> Success!';
+        submitBtn.innerHTML = '✓ Success!';
 
         // Clear the input
         if (emailInput) {
@@ -229,28 +227,55 @@
   // Theme Color Picker
   // ==========================================================================
   const themeColorPicker = document.getElementById('theme-color-picker');
+  const colorSwatches = document.getElementById('color-swatches');
 
   if (themeColorPicker) {
-    // Wait for Web Awesome to be ready
-    customElements.whenDefined('wa-color-picker').then(function() {
-      // Load saved theme color from localStorage
-      const savedColor = localStorage.getItem('theme-color');
-      if (savedColor) {
-        themeColorPicker.value = savedColor;
-        applyThemeColor(savedColor);
-      }
+    // Load saved theme color from localStorage
+    const savedColor = localStorage.getItem('theme-color');
+    if (savedColor) {
+      themeColorPicker.value = savedColor;
+      applyThemeColor(savedColor);
+      updateSwatchActive(savedColor);
+    }
 
-      // Listen for color changes (real-time as user adjusts)
-      themeColorPicker.addEventListener('input', function(e) {
-        applyThemeColor(themeColorPicker.value);
-      });
+    // Listen for color changes (real-time as user adjusts)
+    themeColorPicker.addEventListener('input', function(e) {
+      applyThemeColor(themeColorPicker.value);
+      updateSwatchActive(themeColorPicker.value);
+    });
 
-      // Save color on final selection
-      themeColorPicker.addEventListener('change', function(e) {
-        const color = themeColorPicker.value;
+    // Save color on final selection
+    themeColorPicker.addEventListener('change', function(e) {
+      const color = themeColorPicker.value;
+      localStorage.setItem('theme-color', color);
+      applyThemeColor(color);
+      updateSwatchActive(color);
+    });
+  }
+
+  // Handle swatch clicks
+  if (colorSwatches) {
+    colorSwatches.addEventListener('click', function(e) {
+      const swatch = e.target.closest('.swatch');
+      if (swatch) {
+        const color = swatch.dataset.color;
+        themeColorPicker.value = color;
         localStorage.setItem('theme-color', color);
         applyThemeColor(color);
-      });
+        updateSwatchActive(color);
+      }
+    });
+  }
+
+  function updateSwatchActive(color) {
+    if (!colorSwatches) return;
+    const swatches = colorSwatches.querySelectorAll('.swatch');
+    swatches.forEach(function(swatch) {
+      if (swatch.dataset.color.toLowerCase() === color.toLowerCase()) {
+        swatch.classList.add('active');
+      } else {
+        swatch.classList.remove('active');
+      }
     });
   }
 
@@ -274,10 +299,6 @@
     root.style.setProperty('--color-primary', primaryColor);
     root.style.setProperty('--color-primary-hover', primaryHover);
     root.style.setProperty('--color-primary-light', primaryLight);
-
-    // Update Web Awesome component variables
-    root.style.setProperty('--wa-color-brand-600', primaryColor);
-    root.style.setProperty('--wa-color-brand-700', primaryHover);
   }
 
   /**

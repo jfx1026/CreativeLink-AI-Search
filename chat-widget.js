@@ -19,6 +19,8 @@
   // ==========================================================================
   let triggerBtn;
   let drawer;
+  let drawerClose;
+  let drawerOverlay;
   let messagesContainer;
   let inputForm;
   let inputField;
@@ -38,6 +40,8 @@
     // Cache DOM elements
     triggerBtn = document.getElementById('chat-widget-trigger');
     drawer = document.getElementById('chat-drawer');
+    drawerClose = document.getElementById('chat-drawer-close');
+    drawerOverlay = document.getElementById('chat-drawer-overlay');
     messagesContainer = document.getElementById('chat-messages');
     inputForm = document.getElementById('chat-input-form');
     inputField = document.getElementById('chat-input');
@@ -52,14 +56,21 @@
     // Bind event listeners
     triggerBtn.addEventListener('click', toggleDrawer);
 
-    // Web Awesome uses sl- prefixed events (Shoelace-based)
-    drawer.addEventListener('sl-after-hide', function() {
-      triggerBtn.classList.remove('active');
-    });
+    // Close button
+    if (drawerClose) {
+      drawerClose.addEventListener('click', closeDrawer);
+    }
 
-    drawer.addEventListener('sl-after-show', function() {
-      triggerBtn.classList.add('active');
-      inputField.focus();
+    // Overlay click to close
+    if (drawerOverlay) {
+      drawerOverlay.addEventListener('click', closeDrawer);
+    }
+
+    // Escape key to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
     });
 
     inputForm.addEventListener('submit', handleSubmit);
@@ -89,7 +100,28 @@
   // Drawer Toggle
   // ==========================================================================
   function toggleDrawer() {
-    drawer.open = !drawer.open;
+    if (drawer.classList.contains('open')) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  }
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    drawerOverlay.classList.add('open');
+    triggerBtn.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() {
+      inputField.focus();
+    }, 300);
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    drawerOverlay.classList.remove('open');
+    triggerBtn.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
   // ==========================================================================
@@ -180,7 +212,7 @@
   function addErrorMessage(error) {
     const errorEl = document.createElement('div');
     errorEl.className = 'chat-error';
-    errorEl.innerHTML = '<wa-icon name="circle-exclamation" family="solid"></wa-icon><span>' + escapeHtml(error) + '</span>';
+    errorEl.innerHTML = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>' + escapeHtml(error) + '</span>';
     messagesContainer.appendChild(errorEl);
     scrollToBottom();
   }

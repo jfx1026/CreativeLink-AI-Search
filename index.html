@@ -6,23 +6,23 @@
   <meta name="description" content="John Freeborn - Experienced Design Leader, Strategic Thinker and Innovator bridging Ed-Tech, E-commerce, and Marketing for Global Brands.">
   <title>John Freeborn | Design Leader</title>
 
-  <!-- Web Awesome Pro -->
-  <script src="https://kit.webawesome.com/839cb6e740a04d37.js" crossorigin="anonymous"></script>
-
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="chat-widget.css">
 </head>
 <body>
   <!-- Theme Color Picker -->
   <div class="theme-picker">
-    <wa-color-picker
-      id="theme-color-picker"
-      label="Theme"
-      format="hex"
-      value="#2563EB"
-      size="small"
-      swatches="#2563EB;#7C3AED;#10B981;#F59E0B;#EF4444;#EC4899;#06B6D4;#8B5CF6"
-    ></wa-color-picker>
+    <input type="color" id="theme-color-picker" value="#2563EB" title="Choose theme color">
+    <div class="color-swatches" id="color-swatches">
+      <button class="swatch" data-color="#2563EB" style="background:#2563EB" title="Blue"></button>
+      <button class="swatch" data-color="#7C3AED" style="background:#7C3AED" title="Purple"></button>
+      <button class="swatch" data-color="#10B981" style="background:#10B981" title="Green"></button>
+      <button class="swatch" data-color="#F59E0B" style="background:#F59E0B" title="Amber"></button>
+      <button class="swatch" data-color="#EF4444" style="background:#EF4444" title="Red"></button>
+      <button class="swatch" data-color="#EC4899" style="background:#EC4899" title="Pink"></button>
+      <button class="swatch" data-color="#06B6D4" style="background:#06B6D4" title="Cyan"></button>
+      <button class="swatch" data-color="#8B5CF6" style="background:#8B5CF6" title="Violet"></button>
+    </div>
   </div>
 
   <!-- Header/Navigation -->
@@ -37,7 +37,7 @@
         <a href="#contact" class="nav-link">Contact</a>
       </div>
       <div class="nav-actions">
-        <wa-button variant="outlined" size="small" href="#contact">Get in Touch</wa-button>
+        <a href="#contact" class="btn btn-outlined btn-small">Get in Touch</a>
       </div>
       <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
         <span></span>
@@ -55,14 +55,14 @@
           <h1 class="hero-title">Experienced Design Leader, Strategic Thinker and Innovator</h1>
           <p class="hero-subtitle">Bridging Ed-Tech, E-commerce, and Marketing for Global Brands</p>
           <div class="hero-cta">
-            <wa-button variant="filled" size="large" href="#journey">
+            <a href="#journey" class="btn btn-filled btn-large">
               Explore My Journey
-              <wa-icon name="arrow-down" slot="suffix"></wa-icon>
-            </wa-button>
-            <wa-button variant="outlined" size="large" href="#contact">
-              <wa-icon name="envelope" slot="prefix"></wa-icon>
+              <svg class="icon icon-suffix" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-outlined btn-large">
+              <svg class="icon icon-prefix" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
               Get in Touch
-            </wa-button>
+            </a>
           </div>
         </div>
       </div>
@@ -80,10 +80,10 @@
           </div>
           <div class="intro-images fade-in">
             <div class="image-grid">
-              <div class="image-placeholder"><wa-icon name="image" family="regular"></wa-icon></div>
-              <div class="image-placeholder"><wa-icon name="image" family="regular"></wa-icon></div>
-              <div class="image-placeholder"><wa-icon name="image" family="regular"></wa-icon></div>
-              <div class="image-placeholder"><wa-icon name="image" family="regular"></wa-icon></div>
+              <div class="image-placeholder"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
+              <div class="image-placeholder"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
+              <div class="image-placeholder"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
+              <div class="image-placeholder"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
         <div class="journey-item fade-in">
           <div class="journey-content">
             <div class="journey-marker">
-              <wa-icon name="graduation-cap" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
             </div>
             <h3 class="journey-title">Art School & Teaching</h3>
             <p>In art school, I studied architecture, and the analytical nature of the architecture education affected my creative process and laid the foundation of how I approach design. No decision is made in a vacuum. The medium and the messaging are always intertwined.</p>
@@ -108,11 +108,11 @@
         <!-- SPACE1026 -->
         <div class="journey-item reverse fade-in">
           <div class="journey-image">
-            <div class="image-placeholder large"><wa-icon name="building" family="regular"></wa-icon></div>
+            <div class="image-placeholder large"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg></div>
           </div>
           <div class="journey-content">
             <div class="journey-marker">
-              <wa-icon name="palette" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"/><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"/><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"/><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.8-.1 2.6-.3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51"/></svg>
             </div>
             <h3 class="journey-title">SPACE1026 — Philadelphia</h3>
             <p>By the end of my college career, I knew the architecture field wasn't for me. A few friends and I moved to Philadelphia and founded <a href="#" class="text-link">SPACE1026</a>, an art studio and gallery. SPACE1026 became a meeting ground of emerging art, skateboarding, and design and we showcased the work of many artists early in their careers.</p>
@@ -124,7 +124,7 @@
         <div class="journey-item fade-in">
           <div class="journey-content">
             <div class="journey-marker">
-              <wa-icon name="heart" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
             </div>
             <h3 class="journey-title">Visit Philly — Creative Director</h3>
             <p>Philadelphia was a great place to grow and I worked with a lot of talented people who helped me develop my skills. I was very lucky to land at Visit Philly as a web designer and quickly became the creative director, creating marketing in all media at a scale that I hadn't dreamed of previously.</p>
@@ -135,11 +135,11 @@
         <!-- Black Box -->
         <div class="journey-item reverse fade-in">
           <div class="journey-image">
-            <div class="image-placeholder large"><wa-icon name="skateboard" family="solid"></wa-icon></div>
+            <div class="image-placeholder large"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17h2m8 0h2"/><path d="M9 17h6V6H9z"/><path d="M9 6V4h6v2"/></svg></div>
           </div>
           <div class="journey-content">
             <div class="journey-marker">
-              <wa-icon name="rocket" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
             </div>
             <h3 class="journey-title">Black Box Distribution — San Diego</h3>
             <p>My California adventure started in San Diego in what I call, "my thirteen-year-old dream job" at Black Box Distribution. I managed everything digital for several skateboard brands and started to flex my digital muscles expanding into e-commerce, social, and content.</p>
@@ -151,7 +151,7 @@
         <div class="journey-item fade-in">
           <div class="journey-content">
             <div class="journey-marker">
-              <wa-icon name="apple" family="brands"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"/></svg>
             </div>
             <h3 class="journey-title">Apple & Beyond</h3>
             <p>Over the years, I've bounced back and forth between manager roles and individual contributor roles. In my most recent role at Apple, I was an individual contributor working on global projects with a level of scale in the billions. The work itself was complex and required a system-level thinking that I enjoyed but I missed working with a team, managing and mentoring young designers.</p>
@@ -193,48 +193,48 @@
           <p class="section-subtitle">Decades of experience across design, leadership, and digital innovation.</p>
         </div>
         <div class="features-grid">
-          <wa-card class="feature-card fade-in">
+          <div class="card feature-card fade-in">
             <div class="feature-icon">
-              <wa-icon name="users-line" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
             <h3 class="feature-title">Design Leadership</h3>
             <p class="feature-description">Building and mentoring high-performing design teams, establishing creative processes, and fostering a culture of collaboration.</p>
-          </wa-card>
-          <wa-card class="feature-card fade-in">
+          </div>
+          <div class="card feature-card fade-in">
             <div class="feature-icon">
-              <wa-icon name="lightbulb" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
             </div>
             <h3 class="feature-title">Strategic Thinking</h3>
             <p class="feature-description">Translating business objectives into design strategies that deliver measurable results and meaningful user experiences.</p>
-          </wa-card>
-          <wa-card class="feature-card fade-in">
+          </div>
+          <div class="card feature-card fade-in">
             <div class="feature-icon">
-              <wa-icon name="cart-shopping" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
             </div>
             <h3 class="feature-title">E-commerce</h3>
             <p class="feature-description">Deep expertise in digital commerce, conversion optimization, A/B testing, and creating seamless shopping experiences.</p>
-          </wa-card>
-          <wa-card class="feature-card fade-in">
+          </div>
+          <div class="card feature-card fade-in">
             <div class="feature-icon">
-              <wa-icon name="book-open" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
             </div>
             <h3 class="feature-title">Ed-Tech</h3>
             <p class="feature-description">Designing learning experiences that engage students and make complex concepts accessible and enjoyable.</p>
-          </wa-card>
-          <wa-card class="feature-card fade-in">
+          </div>
+          <div class="card feature-card fade-in">
             <div class="feature-icon">
-              <wa-icon name="bullhorn" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
             </div>
             <h3 class="feature-title">Marketing & Brand</h3>
             <p class="feature-description">Creating compelling brand narratives and marketing campaigns that resonate with audiences across all channels.</p>
-          </wa-card>
-          <wa-card class="feature-card fade-in">
+          </div>
+          <div class="card feature-card fade-in">
             <div class="feature-icon">
-              <wa-icon name="chalkboard-user" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 19a6 6 0 0 0-12 0"/><circle cx="8" cy="9" r="4"/><path d="M22 19a6 6 0 0 0-6-6 4 4 0 1 0 0-8"/></svg>
             </div>
             <h3 class="feature-title">Teaching & Mentorship</h3>
             <p class="feature-description">Years of experience teaching design at the college level and mentoring the next generation of creative professionals.</p>
-          </wa-card>
+          </div>
         </div>
       </div>
     </section>
@@ -246,39 +246,39 @@
           <h2 class="section-title" style="color: white;">What else goes on?</h2>
         </div>
         <div class="contact-grid">
-          <wa-card class="contact-card fade-in">
+          <div class="card contact-card fade-in">
             <div class="contact-icon">
-              <wa-icon name="envelope" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
             </div>
             <h3 class="contact-title">Contact</h3>
             <p class="contact-description">I'm always open to interesting conversations, collaboration, crazy ideas, and good questions. If you'd like to chat, the best way to get my attention is over here.</p>
-            <wa-button variant="outlined" href="#">
+            <a href="#" class="btn btn-outlined">
               Say Hello
-              <wa-icon name="arrow-right" slot="suffix"></wa-icon>
-            </wa-button>
-          </wa-card>
-          <wa-card class="contact-card fade-in">
+              <svg class="icon icon-suffix" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="card contact-card fade-in">
             <div class="contact-icon">
-              <wa-icon name="file-lines" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
             </div>
             <h3 class="contact-title">Resume</h3>
             <p class="contact-description">If you want the tidy, simple resume version of my history I've got that for you. There's also my LinkedIn if you want my whole history in excruciating detail.</p>
-            <wa-button variant="outlined" href="#">
+            <a href="#" class="btn btn-outlined">
               View Resume
-              <wa-icon name="arrow-right" slot="suffix"></wa-icon>
-            </wa-button>
-          </wa-card>
-          <wa-card class="contact-card fade-in">
+              <svg class="icon icon-suffix" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="card contact-card fade-in">
             <div class="contact-icon">
-              <wa-icon name="pen-nib" family="solid"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
             </div>
             <h3 class="contact-title">Words</h3>
             <p class="contact-description">I create a weekly post that I call 'creative links'. It covers many disciplines. I've been doing this for over six years. In addition, you'll find other written gems on my blog.</p>
-            <wa-button variant="outlined" href="#">
+            <a href="#" class="btn btn-outlined">
               Read the Blog
-              <wa-icon name="arrow-right" slot="suffix"></wa-icon>
-            </wa-button>
-          </wa-card>
+              <svg class="icon icon-suffix" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -294,16 +294,16 @@
           </a>
           <div class="social-links">
             <a href="#" aria-label="Twitter">
-              <wa-icon name="x-twitter" family="brands"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
             <a href="#" aria-label="LinkedIn">
-              <wa-icon name="linkedin" family="brands"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
             <a href="#" aria-label="Instagram">
-              <wa-icon name="instagram" family="brands"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
             </a>
             <a href="#" aria-label="Dribbble">
-              <wa-icon name="dribbble" family="brands"></wa-icon>
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308a10.17 10.17 0 0 0 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4a10.13 10.13 0 0 0 6.29 2.166c1.42 0 2.77-.29 4-.816zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248a65.473 65.473 0 0 0-3.8-5.928 10.178 10.178 0 0 0-5.68 7.18zM7.27 3.05c.782 1.972 2.18 3.946 3.832 5.97 4.096-1.09 5.833-2.75 6.012-2.974A10.14 10.14 0 0 0 12 1.842a10.03 10.03 0 0 0-4.73 1.21zm11.727 4.2c-.19.24-2.1 2.02-6.394 3.262.24.49.47.985.68 1.486.075.18.15.36.22.53 3.41-.43 6.8.26 7.14.33-.02-2.11-.81-4.04-2.15-5.61z"/></svg>
             </a>
           </div>
         </div>
@@ -316,16 +316,22 @@
 
   <!-- Chat Widget -->
   <button class="chat-widget-trigger" id="chat-widget-trigger" aria-label="Open chat">
-    <wa-icon name="comments" family="solid" class="icon-chat"></wa-icon>
-    <wa-icon name="xmark" family="solid" class="icon-close"></wa-icon>
+    <svg class="icon icon-chat" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg class="icon icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
 
-  <wa-drawer id="chat-drawer" placement="end" label="Search Design Links">
+  <div class="chat-drawer" id="chat-drawer">
+    <div class="chat-drawer-header">
+      <h3>Search Design Links</h3>
+      <button class="chat-drawer-close" id="chat-drawer-close" aria-label="Close">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
     <div class="chat-container">
       <div class="chat-messages" id="chat-messages">
         <div class="chat-welcome" id="chat-welcome">
           <div class="chat-welcome-icon">
-            <wa-icon name="sparkles" family="solid"></wa-icon>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M3 5h4"/><path d="M19 17v4"/><path d="M17 19h4"/></svg>
           </div>
           <h3>Search 300+ Design Links</h3>
           <p>Ask me about design resources from John's weekly newsletter archive. I can help you find articles, tools, and inspiration.</p>
@@ -347,12 +353,13 @@
             ></textarea>
           </div>
           <button type="submit" class="chat-send-btn" id="chat-send-btn" aria-label="Send message">
-            <wa-icon name="paper-plane" family="solid"></wa-icon>
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13" stroke="currentColor" stroke-width="2" fill="none"/></svg>
           </button>
         </form>
       </div>
     </div>
-  </wa-drawer>
+  </div>
+  <div class="chat-drawer-overlay" id="chat-drawer-overlay"></div>
 
   <script src="script.js" defer></script>
   <script src="chat-widget.js" defer></script>
